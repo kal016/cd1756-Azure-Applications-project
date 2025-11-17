@@ -22,19 +22,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-
-      - name: Install system dependencies (apt packages)
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y build-essential python3-dev
-          sudo apt-get install -y default-libmysqlclient-dev libpq-dev unixodbc-dev
-          sudo apt-get install -y libssl-dev libffi-dev
-
-      - name: Ensure modern build tools (pip/setuptools/wheel/pyparsing)
-        run: |
-          python -m pip install --upgrade pip setuptools wheel pyparsing
+          python-version: '3.11'
 
       # 🛠️ Local Build Section (Optional)
       # The following section in your workflow is designed to catch build issues early on the client side, before deployment. This can be helpful for debugging and validation. However, if this step significantly increases deployment time and early detection is not critical for your workflow, you may remove this section to streamline the deployment process.
@@ -75,9 +63,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B1A515B1ACE147A3AF361A008CBB1EFA }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3C0C9295773E4D078287F391636DCCB4 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_DF62C7488B7F49AA84E40EAB35C0E58A }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_ED7B02E96E604FEFAC661AEC990843FD }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1E2E1B7EAE3B4F6ABDB8796A51752327 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E891B487001C4ADA857F91A9BEBBF57C }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -85,6 +73,4 @@ jobs:
         with:
           app-name: 'articlecmsweb12345'
           slot-name: 'Production'
-
           
-
